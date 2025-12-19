@@ -10,7 +10,7 @@
 # See /LICENSE for more information.
 #
 
-name: Build immortalwrt24.10-6.6 360T7 Latest Passwall
+name: Build immortalwrt24.10-6.6 360T7
 
 on:
   repository_dispatch:
