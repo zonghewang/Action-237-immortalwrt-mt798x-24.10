@@ -1769,12 +1769,11 @@ define Device/qihoo_360t7
 endef
 TARGET_DEVICES += qihoo_360t7
 
-define Device/mt7981-360-t7-108M
-  DEVICE_VENDOR := MediaTek
+define Device/qihoo_360t7_108M
+  DEVICE_VENDOR := Qihoo
   DEVICE_MODEL := 360 T7 (with 108M ubi)
-  DEVICE_DTS := mt7981-360-t7-108M
+  DEVICE_DTS := mt7981b-qihoo-360t7-108M
   DEVICE_DTS_DIR := ../dts
-  SUPPORTED_DEVICES := 360,t7
   UBINIZE_OPTS := -E 5
   BLOCKSIZE := 128k
   PAGESIZE := 2048
@@ -1784,7 +1783,7 @@ define Device/mt7981-360-t7-108M
   IMAGE/factory.bin := append-ubi | check-size $$$$(IMAGE_SIZE)
   IMAGE/sysupgrade.bin := sysupgrade-tar | append-metadata
 endef
-TARGET_DEVICES += mt7981-360-t7-108M
+TARGET_DEVICES += qihoo_360t7_108M
 
 define Device/routerich_ax3000
   DEVICE_VENDOR := Routerich
