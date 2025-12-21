@@ -89,6 +89,7 @@ jobs:
       run: |
         # [ -e files ] && mv files openwrt/files
         cp target/linux/mediatek/image/filogic.mk openwrt/target/linux/mediatek/image/filogic.mk
+        cp target/linux/mediatek/dts/mt7981b-qihoo-360t7-108M.dts openwrt/target/linux/mediatek/dts/mt7981b-qihoo-360t7-108M.dts
          
     - name: Load custom configuration
       run: |
