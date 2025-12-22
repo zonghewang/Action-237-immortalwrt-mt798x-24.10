@@ -90,6 +90,8 @@ jobs:
         # [ -e files ] && mv files openwrt/files
         cp target/linux/mediatek/image/filogic.mk openwrt/target/linux/mediatek/image/filogic.mk
         cp target/linux/mediatek/dts/mt7981b-qihoo-360t7-108M.dts openwrt/target/linux/mediatek/dts/mt7981b-qihoo-360t7-108M.dts
+        if [ -e  .vermagic ]; then cp -f .vermagic openwrt/.vermagic; fi
+        if [ -e  .vermagic ]; then cp include/kernel-defaults.mk openwrt/include/kernel-defaults.mk; fi
          
     - name: Load custom configuration
       run: |
