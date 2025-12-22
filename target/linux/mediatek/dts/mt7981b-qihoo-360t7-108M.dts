@@ -9,7 +9,7 @@
 
 / {
 	model = "360 T7 (with 108M ubi)";
-	compatible = "qihoo,360t7", "mediatek,mt7981";
+	compatible = "qihoo,360t7,108M", "mediatek,mt7981";
 
 	aliases {
 		serial0 = &uart0;
