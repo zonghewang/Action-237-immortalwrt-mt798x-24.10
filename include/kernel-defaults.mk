@@ -128,7 +128,7 @@ define Kernel/Configure/Default
 	}
 	$(_SINGLE) [ -d $(LINUX_DIR)/user_headers ] || $(KERNEL_MAKE) $(if $(findstring uml,$(BOARD)),ARCH=$(ARCH)) INSTALL_HDR_PATH=$(LINUX_DIR)/user_headers headers_install
 	grep '=[ym]' $(LINUX_DIR)/.config.set | LC_ALL=C sort | $(MKHASH) md5 > $(LINUX_DIR)/.vermagic
-  if [ -e  $(TOPDIR)/.vermagic ]; then cp -f $(TOPDIR)/.vermagic $(LINUX_DIR)/.vermagic; fi
+	if [ -e  $(TOPDIR)/.vermagic ]; then cp -f $(TOPDIR)/.vermagic $(LINUX_DIR)/.vermagic; fi
     
 endef
 
