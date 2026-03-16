@@ -1,17 +1,19 @@
 云编译7981固件
 （p3terx 2024新版 基于ubuntu22.04）
 
-360T7主路由固件，含插件DDNS, PASSWALL（用最新源码编译）。
+360T7 / JCG Q30 PRO 主路由固件，含插件DDNS, PASSWALL（用最新源码编译）。
 
-JCG Q30 PRO极简AP固件。
+CMCC-A10(ZN-M5) 极简AP固件。
 
 
 237大佬源码网址:
-[https://github.com/padavanonly/immortalwrt-mt798x-24.10](https://github.com/padavanonly/immortalwrt-mt798x-24.10)
+[[https://github.com/padavanonly/immortalwrt-mt798x-24.10](https://github.com/padavanonly/immortalwrt-mt798x-6.6)]
 
+【24.10 版本强烈推荐 6.6内核！各方面表现都优于 5.4内核。5.4技术过于老旧。】  
+【24.10 6.6内核的源码要改 a10-stock dts 代码才能在h大uboot下正常启动，详见 https://github.com/ATang007ZH/immortalwrt-mt798x-6.6 改动】
 
 passwall最新源码网址：
-https://github.com/xiaorouji/openwrt-passwall
+https://github.com/Openwrt-Passwall/openwrt-passwall
 
 
 ssr plus最新源码网址：
@@ -27,8 +29,8 @@ config配置文件，建议采用本地生成。可装linux或者Windows下装ws
 要使用passwall最新源码，需要更改feeds.conf.default，文件开始处插入：
 
 ```
-src-git passwall_packages https://github.com/xiaorouji/openwrt-passwall-packages.git;main
-src-git passwall https://github.com/xiaorouji/openwrt-passwall.git;main
+src-git passwall_packages https://github.com/Openwrt-Passwall/openwrt-passwall-packages.git;main
+src-git passwall_luci https://github.com/Openwrt-Passwall/openwrt-passwall.git;main
 ```
 
 ----------------------------------------------------------------

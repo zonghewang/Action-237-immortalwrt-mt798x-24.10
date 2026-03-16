@@ -10,7 +10,7 @@
 # See /LICENSE for more information.
 #
 
-name: Build immortalwrt24.10-5.4 JCG Q30Pro Latest Passwall
+name: Build immortalwrt24.10-5.4 JCG Q30Pro Latest Passwall Sing-box
 
 on:
   repository_dispatch:
@@ -20,7 +20,7 @@ env:
   REPO_URL: https://github.com/padavanonly/immortalwrt-mt798x-24.10
   REPO_BRANCH: 2410
   FEEDS_CONF: feeds.conf.default
-  CONFIG_FILE: 2410-5.4-q30pro-passwall.config
+  CONFIG_FILE: 2410-5.4-q30pro-passwall-sing-box.config
   DIY_P1_SH: diy-part1.sh
   DIY_P2_SH: 2410-5.4-diy-part2-6-1-pw.sh
   RELEASE_FILE: 2410-5.4-pw-release.txt 
