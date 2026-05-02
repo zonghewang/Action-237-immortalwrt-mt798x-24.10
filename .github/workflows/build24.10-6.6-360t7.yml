@@ -22,9 +22,10 @@ env:
   REPO_BRANCH: openwrt-24.10-6.6
   FEEDS_CONF: feeds.conf.default
   CONFIG_FILE: 2410-6.6-360t7.config
-  DIY_P1_SH: diy-part1.sh
+  BASE_DIR: 360T7-108M/2410/2410-6.6
+  DIY_P1_SH: 2410-6.6-diy-part1.sh
   DIY_P2_SH: 2410-6.6-diy-part2-6-1.sh
-  RELEASE_FILE: 2410-6.6-release.txt  
+  RELEASE_FILE: 2410-6.6-release.txt
   UPLOAD_BIN_DIR: true
   UPLOAD_FIRMWARE: true
   UPLOAD_RELEASE: true
@@ -61,10 +62,10 @@ jobs:
 
     - name: Load custom feeds
       run: |
-        [ -e $FEEDS_CONF ] && mv $FEEDS_CONF openwrt/feeds.conf.default
-        chmod +x $DIY_P1_SH
+        [ -e $BASE_DIR/$FEEDS_CONF ] && mv $BASE_DIR/$FEEDS_CONF openwrt/feeds.conf.default
+        chmod +x $BASE_DIR/$DIY_P1_SH
         cd openwrt
-        $GITHUB_WORKSPACE/$DIY_P1_SH
+        $GITHUB_WORKSPACE/$BASE_DIR/$DIY_P1_SH
 
     - name: Update feeds
       run: |
@@ -88,20 +89,20 @@ jobs:
 
     - name: Load custom mkfile
       run: |
-        # [ -e files ] && mv files openwrt/files
-        cp target/linux/mediatek/image/filogic.mk openwrt/target/linux/mediatek/image/filogic.mk
-        cp target/linux/mediatek/dts/mt7981b-qihoo-360t7-108M.dts openwrt/target/linux/mediatek/dts/mt7981b-qihoo-360t7-108M.dts
-        # if [ -e  .vermagic ]; then cp -f .vermagic openwrt/.vermagic; fi
-        # if [ -e  .vermagic ]; then cp include/kernel-defaults.mk openwrt/include/kernel-defaults.mk; fi
+        [ -e $BASE_DIR/files ] && mv $BASE_DIR/files openwrt/files
+        cp $BASE_DIR/target/linux/mediatek/Makfile openwrt/target/linux/mediatek/Makfile
+        cp $BASE_DIR/target/linux/mediatek/image/filogic.mk openwrt/target/linux/mediatek/image/filogic.mk
+        cp $BASE_DIR/target/linux/mediatek/dts/mt7981b-qihoo-360t7-108M.dts openwrt/target/linux/mediatek/dts/mt7981b-qihoo-360t7-108M.dts
+        cp $BASE_DIR/package/emortal/default-settings/files/99-default-settings-chinese openwrt/package/emortal/default-settings/files/99-default-settings-chinese
+        # if [ -e  $BASE_DIR/.vermagic ]; then cp -f $BASE_DIR/.vermagic openwrt/.vermagic; fi
+        # if [ -e  $BASE_DIR/.vermagic ]; then cp $BASE_DIR/include/kernel-defaults.mk openwrt/include/kernel-defaults.mk; fi
          
     - name: Load custom configuration
       run: |
-        # [ -e files ] && mv files openwrt/files
-        [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
-        chmod +x $DIY_P2_SH
+        [ -e $BASE_DIR/$CONFIG_FILE ] && mv $BASE_DIR/$CONFIG_FILE openwrt/.config
+        chmod +x $BASE_DIR/$DIY_P2_SH
         cd openwrt
-        $GITHUB_WORKSPACE/$DIY_P2_SH
-
+        $GITHUB_WORKSPACE/$BASE_DIR/$DIY_P2_SH
     - name: Download package
       id: package
       run: |
@@ -155,11 +156,11 @@ jobs:
       if: env.UPLOAD_RELEASE == 'true' && !cancelled()
       run: |
         echo "release_tag=$(date +"%Y.%m.%d-%H%M")" >> $GITHUB_OUTPUT
-        touch "${RELEASE_FILE}"
+        # touch "${RELEASE_FILE}"
 
-        if [ "${UPLOAD_GOFILE}" = "true" ] && [ -n "${{ steps.gofile.outputs.url }}" ]; then
-          echo "{U+0001F517} [GoFile](${{ steps.gofile.outputs.url }})" >> "${RELEASE_FILE}"
-        fi
+        # if [ "${UPLOAD_GOFILE}" = "true" ] && [ -n "${{ steps.gofile.outputs.url }}" ]; then
+        #   echo "{U+0001F517} [GoFile](${{ steps.gofile.outputs.url }})" >> "${RELEASE_FILE}"
+        # fi
 
         echo "status=success" >> $GITHUB_OUTPUT
     
@@ -170,7 +171,7 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         tag_name: ${{ steps.tag.outputs.release_tag }}
-        body_path: ${{ env.RELEASE_FILE }}
+        body_path: ${{ env.BASE_DIR }}/${{ env.RELEASE_FILE }}
         files: ${{ env.FIRMWARE }}/*
 
     - name: Delete workflow runs
