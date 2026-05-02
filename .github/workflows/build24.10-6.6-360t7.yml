@@ -90,7 +90,7 @@ jobs:
     - name: Load custom mkfile
       run: |
         [ -e $BASE_DIR/files ] && mv $BASE_DIR/files openwrt/files
-        cp $BASE_DIR/target/linux/mediatek/Makfile openwrt/target/linux/mediatek/Makfile
+        cp $BASE_DIR/target/linux/mediatek/Makefile openwrt/target/linux/mediatek/Makefile
         cp $BASE_DIR/target/linux/mediatek/image/filogic.mk openwrt/target/linux/mediatek/image/filogic.mk
         cp $BASE_DIR/target/linux/mediatek/dts/mt7981b-qihoo-360t7-108M.dts openwrt/target/linux/mediatek/dts/mt7981b-qihoo-360t7-108M.dts
         cp $BASE_DIR/package/emortal/default-settings/files/99-default-settings-chinese openwrt/package/emortal/default-settings/files/99-default-settings-chinese
