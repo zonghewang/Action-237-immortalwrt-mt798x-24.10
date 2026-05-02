@@ -29,4 +29,21 @@ fi
 sed -i.bak "s,https://downloads.immortalwrt.org,$opkg_mirror,g" "/etc/opkg/distfeeds.conf"
 
 
+uci_dns="$(uci -q get luci.diag.dns)"
+uci_ping="$(uci -q get luci.diag.ping)"
+uci_route="$(uci -q get luci.diag.route)"
+
+default_diag_domin="immortalwrt.org"
+if [ -z "$uci_dns" ] || [ -z "$uci_ping" ] || [ -z "$uci_route" ]; then
+    if [[  "$uci_dns" == "$default_diag_domin" ]] && [[ "$uci_ping" == "$default_diag_domin" ]] && [[ "$uci_route" == "$default_diag_domin" ]]; then
+		uci -q batch <<-EOF
+            set luci.diag.dns="www.baidu.com"
+            set luci.diag.ping="www.baidu.com"
+            set luci.diag.route="www.baidu.com"
+            commit luci
+		EOF
+		sed -i.bak "s,immortalwrt.org,$default_diag_domin,g" "/etc/config/luci.conf"
+    fi
+fi
+
 exit 0
