@@ -18,7 +18,7 @@ on:
   # schedule:
   #    - cron: 0 18 * * *
 env:
-  REPO_URL: https://github.com/zonghewang/immortalwrt-xiaomir3g
+  REPO_URL: https://github.com/Vladdrako/openwrt.git
   REPO_BRANCH: master
   FEEDS_CONF: feeds.conf.default
   CONFIG_FILE: 1806-xiaomir3g.config
@@ -72,7 +72,7 @@ jobs:
          cd openwrt
          ./scripts/feeds update -a
          rm -rf feeds/packages/lang/golang
-         git clone https://github.com/kenzok8/golang feeds/packages/lang/golang
+         git clone https://github.com/kenzok8/golang -b 1.25 feeds/packages/lang/golang
 
     - name: Install feeds
       run: |
