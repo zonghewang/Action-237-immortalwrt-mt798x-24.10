@@ -19,7 +19,7 @@ on:
   #    - cron: 0 18 * * *
 env:
   REPO_URL: https://github.com/zonghewang/immortalwrt-xiaomir3g
-  REPO_BRANCH: ailick
+  REPO_BRANCH: master
   FEEDS_CONF: feeds.conf.default
   CONFIG_FILE: 1806-xiaomir3g.config
   BASE_DIR: xiaomir3g/1806
